@@ -3,7 +3,7 @@ package com.company;
 public class test {
     public static void main(String[] args) {
 
-        Cards deck = new Cards(true);
+        Cards deck = new Cards(false);
         System.out.println("Before shuffle:");
         System.out.println(deck);
         long start = System.currentTimeMillis();
