@@ -15,15 +15,26 @@ public class Blackjack {
     public Blackjack() {
         deck.shuffle();
         // Initial deal
-
-        System.out.println(deck.getTopOfDeckCard());
         currentHand = deck.dealCard(2, currentHand);
-        System.out.println(deck.getTopOfDeckCard());
         houseHand = deck.dealCard(2, houseHand);
-        System.out.println(deck.getTopOfDeckCard());
-        System.out.println(deck);
         System.out.println(currentHand);
         System.out.println(houseHand);
+
+        showCards();
+    }
+
+    public void showCards() {
+        System.out.println("Your hand:");
+        for(int card : currentHand) {
+            System.out.print(deck.trueCardValue(card) + deck.getSuit(card) + ", ");
+        }
+        System.out.println("\n");
+
+        System.out.println("House: ");
+        for(int card : houseHand) {
+            
+            System.out.print(deck.trueCardValue(card) + deck.getSuit(card) + ", ");
+        }
     }
 
 }
