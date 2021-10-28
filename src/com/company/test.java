@@ -7,7 +7,7 @@ public class test {
         System.out.println("Before shuffle:");
         System.out.println(deck);
         long start = System.currentTimeMillis();
-        deck.shuffleAll();
+        deck.shuffle();
         long end = System.currentTimeMillis();
         System.out.println("After shuffle:");
         System.out.println(deck);
