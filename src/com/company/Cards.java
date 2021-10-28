@@ -52,6 +52,7 @@ public class Cards {
     public String toString() {
         return "Cards{" +
                 "cards=" + Arrays.toString(cards) +
+                ", topOfDeck=" + topOfDeck +
                 '}';
     }
 
@@ -67,6 +68,10 @@ public class Cards {
         } else {
             return joker;
         }
+    }
+
+    public int getTopOfDeck() {
+        return topOfDeck;
     }
 
     public void shuffle() {
