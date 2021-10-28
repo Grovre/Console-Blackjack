@@ -106,8 +106,4 @@ public class Cards {
         return cards;
     }
 
-    public void setCards(int[] newSuit) {
-        cards = newSuit;
-    }
-
 }
