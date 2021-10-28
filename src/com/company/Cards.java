@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Cards {
@@ -31,7 +32,7 @@ public class Cards {
     private int[] diamondsWithJoker = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14};*/
 
     private final String spade = "♠";
-    private final String clubs = "♣";
+    private final String club = "♣";
     private final String heart = "♥";
     private final String diamond = "♦";
     private final String joker = "J";
@@ -60,7 +61,7 @@ public class Cards {
         if(card < 14) {
             return spade;
         } else if(card < 27) {
-            return clubs;
+            return club;
         } else if(card < 40) {
             return diamond;
         } else if(card < 53) {
@@ -70,8 +71,12 @@ public class Cards {
         }
     }
 
-    public int getTopOfDeck() {
+    public int getTopOfDeckIndex() {
         return topOfDeck;
+    }
+
+    public int getTopOfDeckCard() {
+        return cards[topOfDeck];
     }
 
     public void shuffle() {
@@ -87,13 +92,18 @@ public class Cards {
         cards = shuffledDeck;
     }
 
-    public int[] dealCard(int cardsToDeal) {
+    public ArrayList<Integer> dealCard(int cardsToDeal, ArrayList<Integer> cardsInPlay) {
         int[] dealtCards = new int[cardsToDeal];
         for(int i = 0; i < cardsToDeal; i++) {
             dealtCards[i] = cards[i];
         }
         topOfDeck += cardsToDeal;
-        return dealtCards;
+
+        ArrayList<Integer> newHand = new ArrayList<>();
+        for (int dealtCard : dealtCards) {
+            cardsInPlay.add(dealtCard);
+        }
+        return cardsInPlay;
     }
 
     public int dealCard() {
