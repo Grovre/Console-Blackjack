@@ -95,9 +95,9 @@ public class Cards {
     public ArrayList<Integer> dealCard(int cardsToDeal, ArrayList<Integer> cardsInPlay) {
         int[] dealtCards = new int[cardsToDeal];
         for(int i = 0; i < cardsToDeal; i++) {
-            dealtCards[i] = cards[i];
+            dealtCards[i] = cards[topOfDeck];
+            topOfDeck++;
         }
-        topOfDeck += cardsToDeal;
 
         ArrayList<Integer> newHand = new ArrayList<>();
         for (int dealtCard : dealtCards) {

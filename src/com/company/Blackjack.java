@@ -15,8 +15,13 @@ public class Blackjack {
     public Blackjack() {
         deck.shuffle();
         // Initial deal
+
+        System.out.println(deck.getTopOfDeckCard());
         currentHand = deck.dealCard(2, currentHand);
+        System.out.println(deck.getTopOfDeckCard());
         houseHand = deck.dealCard(2, houseHand);
+        System.out.println(deck.getTopOfDeckCard());
+        System.out.println(deck);
         System.out.println(currentHand);
         System.out.println(houseHand);
     }
