@@ -116,4 +116,18 @@ public class Cards {
         return cards;
     }
 
+    public int trueCardValue(int card) {
+        if(card < 14) {
+            return card;
+        } else if(card < 27) {
+            return card-13;
+        } else if(card < 40) {
+            return card-27;
+        } else if(card < 53) {
+            return card-39;
+        } else {
+            return 0; // Joker
+        }
+    }
+
 }
