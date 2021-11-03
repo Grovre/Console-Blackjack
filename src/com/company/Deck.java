@@ -48,16 +48,12 @@ public class Deck {
 
     // Doesn't return anything, just prints a good ol' string of the deck in order for you
     public void cleanToString() {
-        System.out.println();
-        long start = System.currentTimeMillis();
         StringBuilder str = new StringBuilder();
         for(Card card : deck) {
             str.append(card.getValue()).append(card.getCardSuitString()).append(", ");
         }
         str = new StringBuilder(str.substring(0, str.length() - 2));
-        long end = System.currentTimeMillis();
         System.out.println(str);
-        System.out.println("It took " + (end-start) + " ms to get clean string");
     }
 
 }
