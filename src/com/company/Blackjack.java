@@ -1,13 +1,10 @@
-package com.company;
-import java.lang.reflect.Array;
+/*package com.company;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class Blackjack {
 
     // private Scanner input = new Scanner(System.in);
-    private Cards deck = new Cards(false);
+    private Deck deck = new Deck(false);
 
     private ArrayList<Integer> currentHand = new ArrayList<>();
     private ArrayList<Integer> houseHand = new ArrayList<>();
@@ -38,3 +35,4 @@ public class Blackjack {
     }
 
 }
+*/
