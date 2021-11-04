@@ -10,6 +10,7 @@ public class Blackjack {
 
     public Blackjack() {
 
+        deck.shuffle();
         System.out.println("Dealing first cards...");
         for(Player player : players) {
             player.addToHand(deck.getTopOfDeck());
