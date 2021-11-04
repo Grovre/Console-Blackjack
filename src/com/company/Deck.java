@@ -5,13 +5,12 @@ import java.util.Arrays;
 public class Deck {
 
     private Card[] deck = new Card[52];
+    private int topOfDeck = 0;
 
     // Constructor dynamically sets the Card[] deck array an unshuffled deck. Shuffle with shuffle() method
     public Deck() {
         for(int suit = 1; suit < 5; suit++) {
-            System.out.println("Suit of " + Card.numToSuit(suit));
             for(int value = 1; value < 14; value++) {
-                System.out.println("Value " + value);
                 deck[(suit-1) * 13 + (value-1)] = new Card(value, suit);
             }
             System.out.println();
@@ -37,6 +36,11 @@ public class Deck {
 
     public Card[] getDeck() {
         return deck;
+    }
+
+    public Card getTopOfDeck() {
+        topOfDeck++;
+        return deck[topOfDeck-1];
     }
 
     @Override

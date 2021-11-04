@@ -8,5 +8,8 @@ public class test {
         deck.shuffle();
         deck.cleanToString();
 
+        Blackjack bj = new Blackjack();
+        bj.progress();
+
     }
 }
