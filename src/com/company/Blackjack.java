@@ -4,15 +4,29 @@ import java.util.Scanner;
 
 public class Blackjack {
 
-    private Player[] players = {new Player("John", 50), new Player("Jack", 50), new Player("Jill", 50)};
+    private Player[] players = new Player[7];
     private Deck deck = new Deck();
     private Scanner input = new Scanner(System.in);
 
     public Blackjack() {
 
+        System.out.println("How many chips will everyone be starting with?");
+        int chipCount = input.nextInt();
+        System.out.println("How many players are playing?");
+        int playerCount = input.nextInt();
+
+        for(int i = 0; i < playerCount; i++) {
+            System.out.println("Player name: ");
+            String name = input.next();
+            players[i] = new Player(name, chipCount);
+        }
+
         deck.shuffle();
         System.out.println("Dealing first cards...");
         for(Player player : players) {
+            if(player == null) {
+                continue;
+            }
             player.addToHand(deck.getTopOfDeck());
             player.addToHand(deck.getTopOfDeck());
             System.out.println(player.getName() + " received: " + player.showCardAtHandIndex(0) + ", " + player.showCardAtHandIndex(1));
@@ -27,6 +41,9 @@ public class Blackjack {
     public void progress() {
 
         for(Player player : players) {
+            if(player == null) {
+                continue;
+            }
             System.out.println("\n");
             if(player.getHandTotal() > 21) {
                 System.out.println(player.getName() + " busted.");
@@ -71,6 +88,7 @@ public class Blackjack {
             }
 
             System.out.println(player.getName() + "'s closing hand: " + player.showHandString());
+            System.out.println("Closing hand's total: " + player.getHandTotal());
 
         }
 
