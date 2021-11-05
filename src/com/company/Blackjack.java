@@ -47,7 +47,8 @@ public class Blackjack {
             System.out.println("\n\n" + player.getName() + "'s turn");
             while(ongoingTurn) {
                 System.out.println("Current hand: " + player.showHandString());
-                System.out.println("Hit (1) or pass (2)?");
+                System.out.println("Total: " + player.getHandTotal());
+                System.out.println("Hit (1) or pass (2)?\n");
                 int hitOrPass = input.nextInt();
                 if (hitOrPass == 1) {
                     player.addToHand(deck.getTopOfDeck());
