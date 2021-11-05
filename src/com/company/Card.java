@@ -43,7 +43,7 @@ public class Card {
         return suit;
     }
 
-    public String getCardSuitString() {
+    public String showCardSuit() {
         return cardSuitString;
     }
 
