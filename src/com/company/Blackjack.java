@@ -7,6 +7,7 @@ public class Blackjack {
     private Player[] players = new Player[7];
     private Deck deck = new Deck();
     private Scanner input = new Scanner(System.in);
+    private Player house = new Player("House", -1);
 
     public Blackjack() {
 
@@ -22,6 +23,12 @@ public class Blackjack {
         }
 
         deck.shuffle();
+
+        house.addToHand(deck.getTopOfDeck());
+        house.addToHand(deck.getTopOfDeck());
+        System.out.println("House gets card: " + house.showCardAtHandIndex(0));
+        System.out.println("House gets another card: Unknown");
+
         System.out.println("Dealing first cards...");
         for(Player player : players) {
             if(player == null) {
@@ -82,8 +89,6 @@ public class Blackjack {
                     System.out.println("Busted.");
                     ongoingTurn = false;
                 }
-
-                
 
             }
 
