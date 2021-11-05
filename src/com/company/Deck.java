@@ -60,15 +60,7 @@ public class Deck {
     public void cleanToString() {
         StringBuilder str = new StringBuilder();
         for(Card card : deck) {
-            String value;
-            if(card.getValue() == 11) {
-                value = "J";
-            } else if(card.getValue() == 12) {
-                value = "Q";
-            } else if(card.getValue() == 13) {
-                value = "K";
-            }
-            str.append(card.getValue()).append(card.showCardSuit()).append(", ");
+            str.append(card.getValueString()).append(card.showCardSuit()).append(", ");
         }
         str = new StringBuilder(str.substring(0, str.length() - 2));
         System.out.println(str);

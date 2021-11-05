@@ -1,12 +1,11 @@
 package com.company;
 
-import javax.print.DocFlavor;
-
 public class Card {
 
     private int suit;
     private int value;
-    private String cardSuitString;
+    private String suitString;
+    private String valueString;
 
     /*
     Suit numbers
@@ -30,9 +29,10 @@ public class Card {
     public Card(int cardValue, int cardSuit) {
         suit = cardSuit;
         value = cardValue;
+        valueString = valueString(cardValue);
 
         // checks cardSuit value in order to assign the string for proper card suit printing
-        cardSuitString = numToSuit(cardSuit);
+        suitString = numToSuit(cardSuit);
     }
 
     public int getValue() {
@@ -43,8 +43,12 @@ public class Card {
         return suit;
     }
 
+    public String getValueString() {
+        return valueString;
+    }
+
     public String showCardSuit() {
-        return cardSuitString;
+        return suitString;
     }
 
     public static String numToSuit(int cardSuit) {
@@ -63,18 +67,38 @@ public class Card {
 
     public void setSuit(int suit) {
         this.suit = suit;
-        this.cardSuitString = numToSuit(suit);
+        this.suitString = numToSuit(suit);
+    }
+
+    public static String valueString(int value) {
+        if(value > 10 || value == 1) {
+            if(value == 11) {
+                return "J";
+            } else if(value == 12) {
+                return "Q";
+            } else if(value == 13) {
+                return "K";
+            } else if(value == 1) {
+                return "A";
+            }
+        }
+        return Integer.toString(value);
     }
 
     public void setValue(int value) {
-        this.value = value;
+        if(value > 10) {
+            this.value = 10;
+        } else {
+            this.value = value;
+        }
+        this.valueString = valueString(value);
     }
 
     @Override
     public String toString() {
         return "Card{" +
                 "value=" + value +
-                ", cardSuitString='" + cardSuitString + '\'' +
+                ", suitString='" + suitString + '\'' +
                 '}';
     }
 }

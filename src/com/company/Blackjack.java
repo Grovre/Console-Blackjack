@@ -44,15 +44,15 @@ public class Blackjack {
             }
 
             boolean ongoingTurn = true;
-            System.out.println("\n\n" + player.getName() + "'s turn");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n" + player.getName() + "'s turn");
             while(ongoingTurn) {
                 System.out.println("Current hand: " + player.showHandString());
-                System.out.println("Total: " + player.getHandTotal());
-                System.out.println("Hit (1) or pass (2)?\n");
+                System.out.println("Hand Total: " + player.getHandTotal());
+                System.out.println("Hit (1) or pass (2)?");
                 int hitOrPass = input.nextInt();
                 if (hitOrPass == 1) {
                     player.addToHand(deck.getTopOfDeck());
-                    System.out.println("New card: " + player.showCardAtHandIndex(2));
+                    System.out.println("\nNew card: " + player.showCardAtHandIndex(2));
                 } else if (hitOrPass == 2) {
                     System.out.println("Passed.");
                     ongoingTurn = false;
@@ -65,6 +65,8 @@ public class Blackjack {
                     System.out.println("Busted.");
                     ongoingTurn = false;
                 }
+
+                
 
             }
 
