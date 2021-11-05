@@ -25,7 +25,9 @@ public class Card {
     13: King
      */
 
-    // Card constructor, sets the card value and suit, along with a string for the suit to print what it is properly
+    // Show methods return a proper String instead of the primitive value (ex. 12 returns "Q" and 1 returns "A")
+
+    // Card constructor, properly sets the card value and suit, along with a string for the suit to print what it is
     public Card(int cardValue, int cardSuit) {
         suit = cardSuit;
         value = cardValue;
@@ -35,22 +37,27 @@ public class Card {
         suitString = numToSuit(cardSuit);
     }
 
+    // Returns value (1-10)
     public int getValue() {
         return value;
     }
 
+    // Returns suit (1-4)
     public int getSuit() {
         return suit;
     }
 
-    public String getValueString() {
+    // Returns value as String (ex. returns "A" if card was created with value 1)
+    public String showValue() {
         return valueString;
     }
 
+    // Returns suit as String (ex. returns spade symbol if card was created with suit 1)
     public String showCardSuit() {
         return suitString;
     }
 
+    // Just returns the suit symbol from a suit number (1-4)
     public static String numToSuit(int cardSuit) {
         if(cardSuit == 1) {
             return "♠";
@@ -70,6 +77,7 @@ public class Card {
         this.suitString = numToSuit(suit);
     }
 
+    // returns the String value of a card anywhere with a value from anything
     public static String valueString(int value) {
         if(value > 10 || value == 1) {
             if(value == 11) {
@@ -85,6 +93,7 @@ public class Card {
         return Integer.toString(value);
     }
 
+    // Sets the value of the card, taking into account the valueString as well
     public void setValue(int value) {
         if(value > 10) {
             this.value = 10;
@@ -101,4 +110,10 @@ public class Card {
                 ", suitString='" + suitString + '\'' +
                 '}';
     }
+
+    // Returns a clean string of the card
+    public String cleanToString() {
+        return valueString + suitString + ", true value of " + value;
+    }
+
 }
