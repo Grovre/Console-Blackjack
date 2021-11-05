@@ -55,20 +55,7 @@ public class Player {
     // Finds the card at the index and returns the string of the card
     public String showCardAtHandIndex(int index) {
         int cardValue = hand[index].getValue();
-        String value = "";
-        if(cardValue > 10 || cardValue == 1) {
-            if(cardValue == 11) {
-                value = "J";
-            } else if(cardValue == 12) {
-                value = "Q";
-            } else if(cardValue == 13) {
-                value = "K";
-            } else if(cardValue == 1) {
-                value = "A";
-            }
-        } else {
-            value = Integer.toString(cardValue);
-        }
+        String value = Card.valueString(cardValue);
         return value + hand[index].showCardSuit();
     }
 
