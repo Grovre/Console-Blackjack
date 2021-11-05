@@ -119,7 +119,7 @@ public class Player {
             if(card == null) {
                 continue;
             }
-            str.append(card.getValueString()).append(card.showCardSuit()).append(", ");
+            str.append(card.showValue()).append(card.showCardSuit()).append(", ");
         }
         return str.substring(0, str.length() - 2);
     }
