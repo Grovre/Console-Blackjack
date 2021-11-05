@@ -20,8 +20,24 @@ public class Deck {
         System.out.println("Duration to create deck dynamically: " + (end-start) + " ms");
     }
 
-    // Shuffles the deck by taking the first Card object in the original deck and putting it into a random index, then taking the next Card object and doing the same and so on
+    // Iterates through the deck, saving the card at the iteration index and the card at a random index to their own variables. Then it swaps their indexes
     public void shuffle() {
+        long start = System.currentTimeMillis();
+        for(int i = 0; i < deck.length; i++) {
+            int randomIndex = (int) (Math.random() * 52);
+            Card card1 = deck[i];
+            Card card2 = deck[randomIndex];
+            deck[i] = card2;
+            deck[randomIndex] = card1;
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("It took " + (end-start) + " ms to shuffle");
+        cleanToString();
+    }
+
+    @Deprecated
+    // Old shuffling method, almost 8 times slower (30/4)
+    public void oldShuffle() {
         long start = System.currentTimeMillis();
         int testCount = 0;
         Card[] temp = new Card[deck.length];
@@ -38,12 +54,14 @@ public class Deck {
         deck = temp;
         long end = System.currentTimeMillis();
         System.out.println("It took " + (end-start) + " ms to shuffle");
+        cleanToString();
     }
 
     public Card[] getDeck() {
         return deck;
     }
 
+    // Top of deck is only used as a way to deal cards, shouldn't need to be called that much if any
     public Card getTopOfDeck() {
         topOfDeck++;
         return deck[topOfDeck-1];
@@ -60,7 +78,7 @@ public class Deck {
     public void cleanToString() {
         StringBuilder str = new StringBuilder();
         for(Card card : deck) {
-            str.append(card.getValueString()).append(card.showCardSuit()).append(", ");
+            str.append(card.showValue()).append(card.showCardSuit()).append(", ");
         }
         str = new StringBuilder(str.substring(0, str.length() - 2));
         System.out.println(str);
