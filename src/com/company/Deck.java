@@ -84,4 +84,8 @@ public class Deck {
         System.out.println(str);
     }
 
+    public void setCard(int index, int value) {
+        this.getDeck()[index].setValue(value);
+    }
+
 }
