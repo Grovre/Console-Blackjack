@@ -113,7 +113,7 @@ public class Card {
 
     // Returns a clean string of the card
     public String cleanToString() {
-        return valueString + suitString + ", true value of " + value;
+        return valueString + suitString;
     }
 
 }
