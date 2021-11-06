@@ -18,6 +18,18 @@ public class Player {
         this.chips = chips;
     }
 
+    public int getBet() {
+        return bet;
+    }
+
+    public int getChips() {
+        return chips;
+    }
+
+    public void rewardBet(int multiplier) {
+        chips += bet*multiplier;
+    }
+
     public String getName() {
         return name;
     }
@@ -60,11 +72,18 @@ public class Player {
     }
 
     public void placeBet(int betAmount) {
+        chips -= betAmount;
         bet += betAmount;
     }
 
     public void callBet(int highestBet) {
+        chips -= highestBet - bet;
         bet = highestBet;
+    }
+
+    public void lostBet() {
+        chips -= bet;
+        bet = 0;
     }
 
     // Adds a card to the hand
