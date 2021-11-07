@@ -7,7 +7,7 @@ public class Blackjack {
     private Player[] players = new Player[7];
     private Deck deck = new Deck();
     private Scanner input = new Scanner(System.in);
-    private Player dealer = new Player("House", -1);
+    private final Player dealer = new Player("House", -1);
     private int betMultiplier = 2;
 
     public Blackjack() {
