@@ -1,4 +1,4 @@
-package com.company;
+package grovre.java;
 
 import grovre.java.Card;
 

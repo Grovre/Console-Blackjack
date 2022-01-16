@@ -1,4 +1,4 @@
-/*package com.company;
+package grovre.java;
 
 public class Main {
 
@@ -8,4 +8,3 @@ public class Main {
 
     }
 }
-*/

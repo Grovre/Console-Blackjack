@@ -1,7 +1,4 @@
-package com.company;
-
-import grovre.java.Card;
-import grovre.java.Deck;
+package grovre.java;
 
 import java.util.Scanner;
 
