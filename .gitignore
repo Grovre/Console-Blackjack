@@ -1,8 +1,8 @@
 # Default ignored files
 /shelf/
 /.idea/workspace.xml
-/out/
 .DS_Store
 /.idea/codeStyles/
 .idea/uiDesigner.xml
 .idea/discord.xml
+/out/production/

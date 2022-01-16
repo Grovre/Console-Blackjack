@@ -1,17 +1,19 @@
 package com.company;
 
+import grovre.java.Card;
+
 import java.util.Arrays;
 
 public class Player {
 
-    private String name;
+    private final String name;
     private int bet;
     private int chips;
-    private Card[] hand = new Card[52];
     private int amountOfCardsInHand = 0;
     private int handTotal = 0;
     private boolean isBust = false;
     private boolean hasBlackjack = false;
+    private final Card[] hand = new Card[11];
 
     public Player(String name, int chips) {
         this.name = name;
@@ -27,28 +29,28 @@ public class Player {
     }
 
     public void rewardBet(int multiplier) {
-        chips += bet*multiplier;
+        chips += bet * multiplier;
     }
 
     public String getName() {
         return name;
     }
 
-    // Sets the player boolean isBust to true
-    public void setOut(boolean isBust) {
-        this.isBust = true;
+    public boolean getBlackjack() {
+        return hasBlackjack;
     }
 
     public void setBlackjack(boolean hasBlackjack) {
         this.hasBlackjack = hasBlackjack;
     }
 
-    public boolean getBlackjack() {
-        return hasBlackjack;
-    }
-
     public boolean getOut() {
         return isBust;
+    }
+
+    // Sets the player boolean isBust to true
+    public void setOut(boolean isBust) {
+        this.isBust = isBust;
     }
 
     // Returns whether the player is out of the game or not
@@ -56,19 +58,22 @@ public class Player {
         return isBust;
     }
 
+    public void setBust(boolean isBust) {
+        this.isBust = isBust;
+    }
+
     // Refreshes handTotal by counting all the cards in the player's hand again
     public void refreshHandTotal() {
         handTotal = 0;
-        for( Card card : hand) {
-            handTotal += card.getValue();
+        for (Card card : hand) {
+            handTotal += card.getVALUE();
         }
     }
 
     // Finds the card at the index and returns the string of the card
     public String showCardAtHandIndex(int index) {
-        int cardValue = hand[index].getValue();
-        String value = Card.valueString(cardValue);
-        return value + hand[index].showCardSuit();
+        String value = hand[index].getVALUE_SHOW();
+        return value + hand[index].getSUIT_SHOW();
     }
 
     public void placeBet(int betAmount) {
@@ -90,18 +95,18 @@ public class Player {
     public void addToHand(Card newCard) {
         hand[amountOfCardsInHand] = newCard;
         amountOfCardsInHand++;
-        if(newCard.getValue() > 10) {
+        if (newCard.getVALUE() > 10) {
             handTotal += 10;
-        } else if(newCard.getValue() == 1 && handTotal + 11 <= 21) {
+        } else if (newCard.getVALUE() == 1 && handTotal + 11 <= 21) {
             handTotal += 11;
         } else {
-            handTotal += newCard.getValue();
+            handTotal += newCard.getVALUE();
         }
     }
 
     // Used to remove a card from the hand
     public void removeFromHand(int deadCardIndex) {
-        handTotal -= hand[deadCardIndex].getValue();
+        handTotal -= hand[deadCardIndex].getVALUE();
         hand[deadCardIndex] = null;
         amountOfCardsInHand--;
     }
@@ -120,14 +125,12 @@ public class Player {
     }
 
     public String showHandString() {
-        StringBuilder str = new StringBuilder();
-        for(Card card : hand) {
-            if(card == null) {
-                continue;
-            }
-            str.append(card.showValue()).append(card.showCardSuit()).append(", ");
+        StringBuilder str = new StringBuilder("" + hand[0].toStringClean());
+        for (int i = 1; i < hand.length; i++) {
+            if (hand[i] == null) continue;
+            str.append(", ").append(hand[i].toStringClean());
         }
-        return str.substring(0, str.length() - 2);
+        return str.toString();
     }
 
     @Override

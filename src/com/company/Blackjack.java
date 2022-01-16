@@ -1,13 +1,16 @@
 package com.company;
 
+import grovre.java.Card;
+import grovre.java.Deck;
+
 import java.util.Scanner;
 
 public class Blackjack {
 
+    private final Player dealer = new Player("House", -1);
     private Player[] players = new Player[7];
     private Deck deck = new Deck();
     private Scanner input = new Scanner(System.in);
-    private final Player dealer = new Player("House", -1);
     private int betMultiplier = 2;
 
     public Blackjack() {
@@ -28,7 +31,7 @@ public class Blackjack {
         }
 
         // Shuffle (doh)
-        deck.shuffle();
+        deck.shuffleDeck();
 
         // House gets cards first
         dealer.addToHand(deck.getTopOfDeck());
@@ -124,7 +127,7 @@ public class Blackjack {
                 System.out.print("Dealer hits: ");
                 Card newCard = deck.getTopOfDeck();
                 dealer.addToHand(newCard);
-                System.out.println(newCard.cleanToString());
+                System.out.println(newCard.toStringClean());
             }
 
             if (dealer.getHandTotal() == 21) {
