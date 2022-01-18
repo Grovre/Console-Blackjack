@@ -36,7 +36,7 @@ public class Player {
         return name;
     }
 
-    public boolean getBlackjack() {
+    public boolean hasBlackjack() {
         return hasBlackjack;
     }
 
@@ -44,7 +44,7 @@ public class Player {
         this.hasBlackjack = hasBlackjack;
     }
 
-    public boolean getOut() {
+    public boolean isOut() {
         return isBust;
     }
 
@@ -113,6 +113,7 @@ public class Player {
 
     // Returns the total of all hands
     public int getHandTotal() {
+        refreshHandTotal();
         return handTotal;
     }
 
