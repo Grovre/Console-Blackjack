@@ -68,9 +68,18 @@ public class Player {
     public int refreshHandTotal() {
         handTotal = 0;
         for (Card card : hand) {
+            if(card == null) break;
             handTotal += card.getVALUE();
         }
         return handTotal;
+    }
+
+    public void resetHand() {
+        Arrays.fill(hand, null);
+        amountOfCardsInHand = 0;
+        handTotal = 0;
+        isBust = false;
+        hasBlackjack = false;
     }
 
     // Finds the card at the index and returns the string of the card
@@ -96,6 +105,12 @@ public class Player {
 
     // Adds a card to the hand
     public void addToHand(Card newCard) {
+        if(amountOfCardsInHand >= 11) {
+            System.out.println("Cannot add anymore cards to hand. " +
+                    "This is for the program's safety. " +
+                    "If this is causing an error with the functionality of the game, please make an issue on github.");
+            return;
+        }
         hand[amountOfCardsInHand] = newCard;
         amountOfCardsInHand++;
         handTotal += newCard.getVALUE();
@@ -125,6 +140,7 @@ public class Player {
     }
 
     // Used to remove a card from the hand
+    // !!! Recommended not to use, can break other methods currently!!!
     public Card removeFromHand(int deadCardIndex) {
         Card card = hand[deadCardIndex];
         handTotal -= hand[deadCardIndex].getVALUE();
