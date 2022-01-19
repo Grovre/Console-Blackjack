@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="EasyCards">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Libs/EasyCards.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

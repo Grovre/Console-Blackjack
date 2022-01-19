@@ -1,5 +1,7 @@
 package grovre.java;
 
+import grovre.java.players.Player;
+
 public class Test {
 
     public static void main(String[] args) {

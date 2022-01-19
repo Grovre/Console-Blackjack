@@ -1,6 +1,7 @@
-package grovre.java;
+package grovre.java.players;
 
 import grovre.java.Card;
+import grovre.java.Deck;
 
 import java.util.Arrays;
 
@@ -9,11 +10,12 @@ public class Player {
     private final String name;
     private int bet;
     private int chips;
-    private int amountOfCardsInHand = 0;
-    private int handTotal = 0;
-    private boolean isBust = false;
-    private boolean hasBlackjack = false;
-    private final Card[] hand = new Card[11];
+    protected int amountOfCardsInHand = 0;
+    protected int handTotal = 0;
+    protected boolean isBust = false;
+    protected boolean hasBlackjack = false;
+    protected final Card[] hand = new Card[11];
+    protected boolean hasAce;
 
     public Player(String name, int chips) {
         this.name = name;
@@ -87,7 +89,6 @@ public class Player {
     }
 
     public void lostBet() {
-        chips -= bet;
         bet = 0;
     }
 
@@ -95,13 +96,30 @@ public class Player {
     public void addToHand(Card newCard) {
         hand[amountOfCardsInHand] = newCard;
         amountOfCardsInHand++;
-        if (newCard.getVALUE() > 10) {
-            handTotal += 10;
-        } else if (newCard.getVALUE() == 1 && handTotal + 11 <= 21) {
-            handTotal += 11;
-        } else {
-            handTotal += newCard.getVALUE();
+        handTotal += newCard.getVALUE();
+        if(handTotal > 21 && hasAce) {
+            for(Card c : hand) {
+                if(c.getCardType() == 1) {
+                    c.setVALUE(1);
+                    refreshHandTotal();
+                    if(handTotal <= 21) break;
+                }
+            }
+            System.out.println("No Ace found. Why did the search start?");
+            System.out.println("Hand: " + Deck.toStringClean(hand));
         }
+    }
+
+    public void updateBlackjack() {
+        if(handTotal == 21) {
+            hasBlackjack = true;
+        } else {
+            hasBlackjack = false;
+        }
+    }
+
+    public Card getRecentCard() {
+        return hand[amountOfCardsInHand - 1];
     }
 
     // Used to remove a card from the hand
@@ -125,13 +143,17 @@ public class Player {
         return hand;
     }
 
-    public String showHandString() {
+    public String toStringClean() {
         StringBuilder str = new StringBuilder("" + hand[0].toStringClean());
         for (int i = 1; i < hand.length; i++) {
             if (hand[i] == null) continue;
             str.append(", ").append(hand[i].toStringClean());
         }
         return str.toString();
+    }
+
+    public String getCurrentHand() {
+        return toStringClean();
     }
 
     @Override
