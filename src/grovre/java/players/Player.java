@@ -65,11 +65,12 @@ public class Player {
     }
 
     // Refreshes handTotal by counting all the cards in the player's hand again
-    public void refreshHandTotal() {
+    public int refreshHandTotal() {
         handTotal = 0;
         for (Card card : hand) {
             handTotal += card.getVALUE();
         }
+        return handTotal;
     }
 
     // Finds the card at the index and returns the string of the card
@@ -78,9 +79,10 @@ public class Player {
         return value + hand[index].getSUIT_SHOW();
     }
 
-    public void placeBet(int betAmount) {
+    public int placeBet(int betAmount) {
         chips -= betAmount;
         bet += betAmount;
+        return bet;
     }
 
     public void callBet(int highestBet) {
@@ -101,8 +103,7 @@ public class Player {
             for(Card c : hand) {
                 if(c.getCardType() == 1) {
                     c.setVALUE(1);
-                    refreshHandTotal();
-                    if(handTotal <= 21) break;
+                    if(refreshHandTotal() <= 21) break;
                 }
             }
             System.out.println("No Ace found. Why did the search start?");
@@ -110,12 +111,13 @@ public class Player {
         }
     }
 
-    public void updateBlackjack() {
+    public boolean updateBlackjack() {
         if(handTotal == 21) {
             hasBlackjack = true;
         } else {
             hasBlackjack = false;
         }
+        return hasBlackjack;
     }
 
     public Card getRecentCard() {
@@ -123,10 +125,12 @@ public class Player {
     }
 
     // Used to remove a card from the hand
-    public void removeFromHand(int deadCardIndex) {
+    public Card removeFromHand(int deadCardIndex) {
+        Card card = hand[deadCardIndex];
         handTotal -= hand[deadCardIndex].getVALUE();
         hand[deadCardIndex] = null;
         amountOfCardsInHand--;
+        return card;
     }
 
     // Returns the total of all hands
