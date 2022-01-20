@@ -15,7 +15,7 @@ public class Dealer extends Player {
 
     public void beginFlopping(Deck deck) {
         System.out.println("Dealer has: ");
-        System.out.print(getCurrentHand());
+        System.out.print(getHandClean());
         while(handTotal < 17) {
             flop(deck.takeTopOfDeck());
         }

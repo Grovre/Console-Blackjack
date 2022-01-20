@@ -4,6 +4,7 @@ import grovre.java.Card;
 import grovre.java.Deck;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Player {
 
@@ -18,10 +19,36 @@ public class Player {
     protected boolean hasAce;
     private boolean canSplit;
     private boolean canDoubleDown;
+    private boolean isStanding;
+    private final Card[] splitHand = new Card[11];
 
     public Player(String name, int chips) {
         this.name = name;
         this.chips = chips;
+    }
+
+    public boolean canSplit() {
+        return canSplit;
+    }
+
+    public void canSplit(boolean split) {
+        this.canSplit = split;
+    }
+
+    public boolean canDoubleDown() {
+        return canDoubleDown;
+    }
+
+    public void canDoubleDown(boolean doubleDown) {
+        this.canDoubleDown = doubleDown;
+    }
+
+    public boolean isStanding() {
+        return isStanding;
+    }
+
+    public void isStanding(boolean standing) {
+        this.isStanding = standing;
     }
 
     public int getBet() {
@@ -73,7 +100,50 @@ public class Player {
             if(card == null) break;
             handTotal += card.getVALUE();
         }
+
         return handTotal;
+    }
+
+    public void refreshBooleans() {
+        hasBlackjack = handTotal == 21;
+        isBust = handTotal > 21;
+        hasAce = checkForAce();
+        int[] sameCards = checkForTwoSameCards();
+        canSplit = sameCards[0] != -1;
+        canDoubleDown = refreshAmountOfCardsInHand() == 2;
+    }
+
+    public int[] checkForTwoSameCards() {
+        for(int i = 0; i < hand.length; i++) {
+            if(hand[i] == null) continue;
+            for(int j = i; j < hand.length; j++) {
+                if(hand[j] == null) continue;
+                if(hand[j].getVALUE_ORDER() == hand[i].getVALUE_ORDER()) {
+                    return new int[]{i, j};
+                }
+            }
+        }
+        return new int[]{-1, -1};
+    }
+
+    public int refreshAmountOfCardsInHand() {
+        int count = 0;
+        for(Card c : hand) {
+            if(c == null) continue;
+            count++;
+        }
+        amountOfCardsInHand = count;
+        return count;
+    }
+
+    public boolean checkForAce() {
+        for(Card c : hand) {
+            if(c == null) continue;
+            if(c.getCardType() == 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void resetHand() {
@@ -174,7 +244,7 @@ public class Player {
         return str.toString();
     }
 
-    public String getCurrentHand() {
+    public String getHandClean() {
         return toStringClean();
     }
 
@@ -186,5 +256,9 @@ public class Player {
                 ", chips=" + chips +
                 ", hand=" + Arrays.toString(hand) +
                 '}';
+    }
+
+    public void setStanding(boolean standing) {
+        isStanding = standing;
     }
 }
