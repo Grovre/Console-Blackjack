@@ -16,6 +16,8 @@ public class Player {
     protected boolean hasBlackjack = false;
     protected final Card[] hand = new Card[11];
     protected boolean hasAce;
+    private boolean canSplit;
+    private boolean canDoubleDown;
 
     public Player(String name, int chips) {
         this.name = name;
